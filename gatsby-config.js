@@ -5,8 +5,8 @@ module.exports = {
     title: 'Habu Matano',
     description:
       'Habu Matano is a computer science student specializing in web development, passionate about building responsive and user-friendly digital experiences.',
-    siteUrl: 'https://chandrikadeb7.github.io', // No trailing slash allowed!
-    image: '/og.png', // Path to your image you placed in the 'static' folder
+    siteUrl: 'https://my-portifoli0.vercel.app/', // No trailing slash allowed!
+    image: '/og@2.png', // Path to your image you placed in the 'static' folder
     twitterUsername: '@ma5Codes',
   },
   plugins: [

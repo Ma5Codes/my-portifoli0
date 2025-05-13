@@ -51,44 +51,39 @@ const Hero = () => {
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
-    if (prefersReducedMotion) {
-      return;
-    }
+    if (prefersReducedMotion) return;
 
     const timeout = setTimeout(() => setIsMounted(true), navDelay);
     return () => clearTimeout(timeout);
   }, []);
+
   const one = <h1>Hello! My name is</h1>;
   const two = <h2 className="big-heading">Habu Matano</h2>;
   const three = <h3 className="medium-heading">Tech Enthusiast | Web Developer | Web Designer</h3>;
+
   const four = (
     <>
       <p>
-        <b>I build accessible, pixel-perfect digital experiences for the web</b>
+        I build accessible, user-friendly, and performance-driven web applications that connect ideas to impact.
       </p>
-  
       <p>
-        I am Habu, a final-year computer science student and alumnus of {' '}
-        <a href="https://www.mut.ac.ke">Murang'a University of Technology</a>, passionate about creating intuitive and high-performance web applications.
+        Passionate about clean code, elegant design, and modern technologies like React.js, Node.js, and TypeScript.
       </p>
-  
       <p>
-        Currently, I'm enhancing my skills in React.js, Node.js, and TypeScript to build responsive, user-centered web experiences. When I'm not coding, you can find me exploring new design ideas on {' '}
-        <a href="https://www.freecodecamp.org/">freeCodeCamp</a> or sharing my project journey on {' '}
-        <a href="https://www.linkedin.com">LinkedIn</a> and GitHub.
+        Explore my work on <a href="https://github.com/Ma5Codes" target="_blank" rel="noreferrer">GitHub</a>, or let's connect on <a href="https://www.linkedin.com/in/habu-matano" target="_blank" rel="noreferrer">LinkedIn</a>.
       </p>
     </>
   );
+
   const five = (
     <a
       className="email-link"
       href="https://www.linkedin.com/in/habu-matano"
       target="_blank"
       rel="noreferrer">
-      Connect with me on LinkedIn!
+      Connect with me on LinkedIn
     </a>
   );
-  
 
   const items = [one, two, three, four, five];
 

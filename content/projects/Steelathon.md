@@ -1,14 +1,15 @@
 ---
-date: '2023-08-20'
-title: 'Tata Steel: Steel-a-thon 2023 (Business Track)'
+date: '2025-04-17'
+title: 'Back End Development and APIs'
 github: ''
-external: 'https://docs.google.com/presentation/d/1BoHWWokNWOHcMYUhMUO4taLX_-Plec2bfrswio2Wa2A/edit?usp=sharing'
+external: 'https://www.freecodecamp.org/certification/ma5Codes/back-end-development-and-apis'
 tech:
-  - Strategy
-  - Marketing
-  - Sustainability
-company: 'Case Competition'
+  - Node.js
+  - Express
+  - MongoDB
+  - RESTful APIs
+company: 'freeCodeCamp'
 showInProjects: true
 ---
 
-Determining Brand Positioning for new Tata Tiscon Rebar through Electric Arc Furnace (EAF) route or Green Steel
+Completed the **Back End Development and APIs** certification on freeCodeCamp. Built and deployed multiple backend applications using Node.js and Express

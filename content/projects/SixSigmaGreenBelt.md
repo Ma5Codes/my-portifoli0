@@ -1,14 +1,16 @@
 ---
-date: '2022-06-12'
-title: 'Six Sigma: Green Belt'
+date: '2025-04-12'
+title: 'Python for Data Science Pro: Complete Master Course'
 github: ''
-external: 'https://drive.google.com/file/d/1ws4f_iy70ZaTfieBaP83WdwwSSCAyQYc/view?usp=sharing'
+external: 'https://www.linkedin.com/in/habu-matano/details/certifications/'
 tech:
-  - DMAIC
-  - TQM
-  - Process Improvement
-company: 'Certification'
+  - Python
+  - NumPy
+  - Pandas
+  - Data Visualization
+  - Machine Learning
+company: 'Udemy'
 showInProjects: true
 ---
 
-Understood the fundamentals of Six Sigma along with project implementations
+Completed a comprehensive course on **Python for Data Science**, mastering essential tools and libraries used in modern data analysis and machine learning workflows.

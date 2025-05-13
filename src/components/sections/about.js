@@ -18,6 +18,7 @@ const StyledAboutSection = styled.section`
     }
   }
 `;
+
 const StyledText = styled.div`
   ul.skills-list {
     display: grid;
@@ -46,6 +47,7 @@ const StyledText = styled.div`
     }
   }
 `;
+
 const StyledPic = styled.div`
   position: relative;
   max-width: 300px;
@@ -124,44 +126,51 @@ const About = () => {
 
     sr.reveal(revealContainer.current, srConfig());
   }, []);
-  const skills = ['React.js', 'Node.js', 'TypeScript', 'JavaScript', 'HTML & CSS', 'Git', 'Firebase', 'Python'];
+
+  const skills = [
+    'React.js',
+    'Node.js',
+    'TypeScript',
+    'JavaScript',
+    'HTML & CSS',
+    'Git',
+    'Firebase',
+    'Python',
+  ];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
       <h2 className="numbered-heading">About Me</h2>
-  
+
       <div className="inner">
         <StyledText>
           <div>
             <p>
-              As a final-year computer science student at {' '}
-              <a href="https://www.mut.ac.ke">Murang'a University of Technology</a>, I am passionate about creating
-              intuitive and accessible web applications that merge clean design with functional engineering.
+              I'm a Front-end Developer based in Nairobi, Kenya, focused on crafting responsive and engaging digital experiences for the web.
             </p>
-  
+
             <p>
-              I have built projects in areas such as e-commerce, event management, and productivity tools, developing a strong foundation in front-end technologies like React.js and TypeScript.
-              Recently, I completed an internship where I expanded my skills in full-stack development and refined my approach to building responsive, high-performance applications.
+              I specialize in building modern, scalable applications using cutting-edge technologies and clean design practices.
             </p>
-  
+
             <p>
-              My experience includes using frameworks and libraries that enhance both the functionality and user experience of my projects. I am committed to staying updated on the latest web technologies to build solutions that not only look great but also provide meaningful, accessible experiences.
+              My work spans various domains including e-commerce, event platforms, and productivity tools, where I blend functionality with aesthetics.
             </p>
-  
+
             <p>
-              I enjoy connecting with like-minded professionals on {' '}
-              <a href="https://www.linkedin.com">LinkedIn</a> and showcasing my project journey on {' '}
-              <a href="https://github.com">GitHub</a>, where I continue to learn, build, and grow.
+              I’m always open to meaningful collaborations. Let’s connect on{' '}
+              <a href="https://www.linkedin.com/in/habu-matano" target="_blank" rel="noreferrer">LinkedIn</a> or check out my work on{' '}
+              <a href="https://github.com/Ma5Codes" target="_blank" rel="noreferrer">GitHub</a>.
             </p>
-  
+
             <p>My skills include, but are not limited to, the following:</p>
           </div>
-  
+
           <ul className="skills-list">
             {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
           </ul>
         </StyledText>
-  
+
         <StyledPic>
           <div className="wrapper">
             <StaticImage
@@ -177,6 +186,6 @@ const About = () => {
       </div>
     </StyledAboutSection>
   );
-}  
+};
 
 export default About;

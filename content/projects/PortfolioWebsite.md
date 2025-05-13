@@ -1,8 +1,8 @@
 ---
-date: '2021-04-20'
+date: '2024-07-10'
 title: 'Personal Website'
-github: 'https://github.com/chandrikadeb7/chandrikadeb7.github.io'
-external: 'https://chandrikadeb7.github.io'
+github: 'https://github.com/Ma5Codes/my-portifoli0'
+external: 'https://my-portifoli0.vercel.app/'
 tech:
   - JavaScript
   - GraphQL
@@ -11,5 +11,4 @@ company: 'Project'
 showInProjects: true
 ---
 
-Personal portfolio website hosted on GitHub Pages inspired by Brittany Chiang's V4 template
-
+Personal portfolio website hosted on GitHub Pages
