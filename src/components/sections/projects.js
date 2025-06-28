@@ -37,9 +37,41 @@ const StyledProjectsSection = styled.section`
     }
   }
 
+  .buttons-container {
+    display: flex;
+    gap: 20px;
+    margin: 80px auto 0;
+    align-items: center;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+
   .more-button {
     ${({ theme }) => theme.mixins.button};
-    margin: 80px auto 0;
+  }
+
+  .github-button {
+    ${({ theme }) => theme.mixins.button};
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    border: 1px solid var(--green);
+    color: var(--green);
+
+    &:hover,
+    &:focus {
+      background-color: var(--green);
+      color: var(--navy);
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
   }
 `;
 
@@ -302,9 +334,22 @@ const Projects = () => {
         )}
       </ul>
 
-      <button className="more-button" onClick={() => setShowMore(!showMore)}>
-        Show {showMore ? 'Less' : 'More'}
-      </button>
+      <div className="buttons-container">
+        <button className="more-button" onClick={() => setShowMore(!showMore)}>
+          Show {showMore ? 'Less' : 'More'}
+        </button>
+        
+        <a 
+          className="github-button" 
+          href="https://github.com/Ma5Codes" 
+          target="_blank" 
+          rel="noreferrer"
+          aria-label="Visit GitHub Profile"
+        >
+          <Icon name="GitHub" />
+          View GitHub For More
+        </a>
+      </div>
     </StyledProjectsSection>
   );
 };

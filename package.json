@@ -32,7 +32,7 @@
       "eslint --fix"
     ]
   },
- "dependencies": {
+  "dependencies": {
     "animejs": "^3.1.0",
     "babel-plugin-styled-components": "^1.12.0",
     "gatsby": "^3.4.1",
@@ -53,6 +53,7 @@
     "gatsby-transformer-remark": "^4.1.0",
     "gatsby-transformer-sharp": "^3.4.0",
     "lodash": "^4.17.19",
+    "nodemailer": "^7.0.3",
     "prismjs": "^1.27.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",

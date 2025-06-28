@@ -9,32 +9,24 @@ const StyledContactSection = styled.section`
   margin: 0 auto 100px;
   color: var(--lightest-slate);
   text-align: center;
-  
-h2 {
-  display: inline-block;
-  position: relative;
-  text-align: center;
-  font-size: clamp(32px, 5vw, 50px);
-  font-weight: bold;
-  margin-bottom: 10px;
 
-  &:after {
-    content: '';
-    display: block;
-    height: 2px;
-    width: 60%;
-    margin: 8px auto 0;
-    background-color: var(--lightest-slate);
+  h2 {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    font-size: clamp(32px, 5vw, 50px);
+    font-weight: bold;
+    margin-bottom: 10px;
+
+    &:after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 60%;
+      margin: 8px auto 0;
+      background-color: var(--lightest-slate);
+    }
   }
-}
-
-  // h2 {
-  //   font-size: clamp(32px, 5vw, 50px);
-  //   font-weight: bold;
-  //   margin-bottom: 10px;
-  //   border-bottom: 1px solid var(--lightest-slate);
-  //   padding-bottom: 5px;
-  // }
 
   p {
     font-size: var(--fz-lg);
@@ -42,7 +34,6 @@ h2 {
     line-height: 1.6;
     color: var(--light-slate);
   }
-
 
   form {
     display: grid;
@@ -57,6 +48,16 @@ h2 {
       color: var(--lightest-slate);
       border-radius: 4px;
       font-family: var(--font-sans);
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: var(--green);
+      }
+
+      &::placeholder {
+        color: var(--slate);
+      }
     }
 
     textarea {
@@ -75,6 +76,61 @@ h2 {
       ${({ theme }) => theme.mixins.bigButton};
       font-size: var(--fz-lg);
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
+
+      &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
+      .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid transparent;
+        border-top: 2px solid currentColor;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 8px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    }
+  }
+
+  .status-message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 4px;
+    font-size: var(--fz-md);
+    font-weight: 500;
+    animation: slideIn 0.3s ease-out;
+
+    &.success {
+      background-color: rgba(100, 255, 218, 0.1);
+      border: 1px solid var(--green);
+      color: var(--green);
+    }
+
+    &.error {
+      background-color: rgba(255, 100, 100, 0.1);
+      border: 1px solid #ff6464;
+      color: #ff6464;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   }
 `;
@@ -88,6 +144,8 @@ const Contact = () => {
     phone: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState({ type: '', message: '' });
 
   useEffect(() => {
     if (prefersReducedMotion) return;
@@ -97,11 +155,120 @@ const Contact = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    
+    // Clear status message when user starts typing
+    if (statusMessage.message) {
+      setStatusMessage({ type: '', message: '' });
+    }
   };
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    const { name, email, phone, message } = formData;
+    
+    if (!name.trim() || !email.trim() || !phone.trim() || !message.trim()) {
+      setStatusMessage({ type: 'error', message: 'Please fill in all required fields.' });
+      return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setStatusMessage({ type: 'error', message: 'Please enter a valid email address.' });
+      return false;
+    }
+
+    if (name.length > 100) {
+      setStatusMessage({ type: 'error', message: 'Name is too long (max 100 characters).' });
+      return false;
+    }
+
+    if (message.length > 2000) {
+      setStatusMessage({ type: 'error', message: 'Message is too long (max 2000 characters).' });
+      return false;
+    }
+
+    return true;
+  };
+
+const sendEmail = async (formData) => {
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...formData,
+        to: email,
+      }),
+    });
+
+    // Check if response is ok and has content
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Server error:', errorText);
+      throw new Error(`Server error: ${response.status}`);
+    }
+
+    // Check if response has content before parsing
+    const responseText = await response.text();
+    if (!responseText) {
+      throw new Error('Empty response from server');
+    }
+
+    const result = JSON.parse(responseText);
+    return { success: true, data: result };
+  } catch (error) {
+    console.error('Email sending error:', error);
+    return { success: false, error: error.message };
+  }
+};
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    window.location.href = `mailto:${email}?subject=Contact from Portfolio&body=Name: ${formData.name}%0AEmail: ${formData.email}%0APhone: ${formData.phone}%0AMessage: ${formData.message}`;
+    
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setStatusMessage({ type: '', message: '' });
+
+    try {
+      const result = await sendEmail(formData);
+      
+      if (result.success) {
+        setStatusMessage({ 
+          type: 'success', 
+          message: 'Thank you! Your message has been sent successfully. I\'ll get back to you soon!' 
+        });
+        
+        // Clear form after successful submission
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          message: '',
+        });
+        
+        // Auto-hide success message after 8 seconds
+        setTimeout(() => {
+          setStatusMessage({ type: '', message: '' });
+        }, 8000);
+        
+      } else {
+        setStatusMessage({ 
+          type: 'error', 
+          message: result.error || 'Failed to send message. Please try again or contact me directly.' 
+        });
+      }
+    } catch (error) {
+      setStatusMessage({ 
+        type: 'error', 
+        message: 'An unexpected error occurred. Please try again later.' 
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -109,7 +276,7 @@ const Contact = () => {
       <p className="overline">CONTACT</p>
       <h2>Get In Touch</h2>
       <p>
-        If you have any suggestion, project or even you want to say “hello”, please fill out the form
+        If you have any suggestion, project or even you want to say "hello", please fill out the form
         below and I will reply you shortly.
       </p>
 
@@ -121,6 +288,8 @@ const Contact = () => {
           value={formData.name}
           onChange={handleChange}
           required
+          disabled={isSubmitting}
+          maxLength={100}
         />
         <input
           type="email"
@@ -129,15 +298,17 @@ const Contact = () => {
           value={formData.email}
           onChange={handleChange}
           required
+          disabled={isSubmitting}
         />
         <input
-          type="text"
+          type="tel"
           name="phone"
           placeholder="Phone *"
           value={formData.phone}
           onChange={handleChange}
           className="full-width"
           required
+          disabled={isSubmitting}
         />
         <textarea
           name="message"
@@ -145,9 +316,20 @@ const Contact = () => {
           value={formData.message}
           onChange={handleChange}
           required
+          disabled={isSubmitting}
+          maxLength={2000}
         />
-        <button type="submit">Mail Me!</button>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting && <span className="loading-spinner"></span>}
+          {isSubmitting ? 'Sending...' : 'Send Message'}
+        </button>
       </form>
+
+      {statusMessage.message && (
+        <div className={`status-message ${statusMessage.type}`}>
+          {statusMessage.message}
+        </div>
+      )}
     </StyledContactSection>
   );
 };

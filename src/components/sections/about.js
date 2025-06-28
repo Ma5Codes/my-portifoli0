@@ -50,11 +50,13 @@ const StyledText = styled.div`
 
 const StyledPic = styled.div`
   position: relative;
-  max-width: 300px;
+  max-width: 350px; /* Increased from 300px */
+  min-height: 400px; /* Added minimum height for more vertical space */
 
   @media (max-width: 768px) {
     margin: 50px auto 0;
     width: 70%;
+    min-height: 350px; /* Adjusted for mobile */
   }
 
   .wrapper {
@@ -62,6 +64,8 @@ const StyledPic = styled.div`
     display: block;
     position: relative;
     width: 100%;
+    height: 100%; /* Make wrapper take full height */
+    min-height: 380px; /* Ensure minimum height */
     border-radius: var(--border-radius);
     background-color: var(--green);
 
@@ -86,6 +90,9 @@ const StyledPic = styled.div`
       mix-blend-mode: multiply;
       filter: grayscale(100%) contrast(1);
       transition: var(--transition);
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensure proper image scaling */
     }
 
     &:before,
@@ -108,8 +115,8 @@ const StyledPic = styled.div`
 
     &:after {
       border: 2px solid var(--green);
-      top: 14px;
-      left: 14px;
+      top: 20px; /* Increased from 14px to match new spacing */
+      left: 20px; /* Increased from 14px to match new spacing */
       z-index: -1;
     }
   }
@@ -128,14 +135,13 @@ const About = () => {
   }, []);
 
   const skills = [
+    'React native',
     'React.js',
     'Node.js',
     'TypeScript',
     'JavaScript',
-    'HTML & CSS',
     'Git',
     'Firebase',
-    'Python',
   ];
 
   return (
@@ -158,7 +164,7 @@ const About = () => {
             </p>
 
             <p>
-              I’m always open to meaningful collaborations. Let’s connect on{' '}
+              I'm always open to meaningful collaborations. Let's connect on{' '}
               <a href="https://www.linkedin.com/in/habu-matano" target="_blank" rel="noreferrer">LinkedIn</a> or check out my work on{' '}
               <a href="https://github.com/Ma5Codes" target="_blank" rel="noreferrer">GitHub</a>.
             </p>
