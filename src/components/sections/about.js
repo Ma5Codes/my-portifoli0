@@ -138,10 +138,12 @@ const About = () => {
     'React native',
     'React.js',
     'Node.js',
+    'Next.js',
     'TypeScript',
     'JavaScript',
     'Git',
     'Firebase',
+    'Supabase',
   ];
 
   return (
