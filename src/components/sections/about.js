@@ -7,6 +7,7 @@ import { usePrefersReducedMotion } from '@hooks';
 
 const StyledAboutSection = styled.section`
   max-width: 900px;
+  margin-top: -50px;
 
   .inner {
     display: grid;
