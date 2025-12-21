@@ -1,7 +1,7 @@
 ---
-date: '2'
+date: '3'
 title: 'Drowsiness and Yawn Detection System'
-cover: './drowsiness.png'
+cover: './drowsinessdetection.png'
 github: 'https://github.com/Ma5Codes/drowsiness-detection'
 external: 'https://github.com/Ma5Codes/drowsiness-detection'
 tech:

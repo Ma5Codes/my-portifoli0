@@ -3,7 +3,7 @@ date: '4'
 title: 'DaktariHub - Healthcare Platform'
 cover: './daktarihub.png'
 github: 'https://github.com/Ma5Codes/daktarihub'
-external: 'https://github.com/Ma5Codes/daktarihub'
+external: 'https://daktari-hub-fe.vercel.app/'
 tech:
   - React
   - Next.js
